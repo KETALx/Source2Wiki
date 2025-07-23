@@ -1,0 +1,53 @@
+
+.game-tabs .steamvr::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  background-image: url('@site/static/img/steamvr_icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+
+.game-tabs .hla::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  background-image: url('@site/static/img/hla_icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.game-tabs .dota2::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  background-image: url('@site/static/img/dota2_icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.game-tabs .cs2::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  background-image: url('@site/static/img/cs2_icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
