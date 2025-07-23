@@ -1,5 +1,5 @@
 import GameDropDown from '@site/src/components/GameDropDown';
-import { Games } from '@site/src/components/GameDropDown';
+import { Games } from '@site/src/constants/games';
 import { useState } from 'react';
 import { useGameParam } from '@site/src/contexts/GameParamContext';
 import { useHistory, useLocation } from '@docusaurus/router';
