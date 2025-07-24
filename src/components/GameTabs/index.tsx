@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import './style.css';
-import { Games } from '@site/src/constants/games';
+import { Games } from '@site/src/constants/software';
 
 const GameTabs: React.FC<Record<string, React.ReactNode>> = (props) => {
   const gameContent: Record<string, React.ReactNode> = {};
