@@ -8,20 +8,18 @@ const GameTabs: React.FC<Record<string, React.ReactNode>> = (props) => {
   const gameContent: Record<string, React.ReactNode> = {};
   
   Object.entries(props).forEach(([key, value]) => {
-    if (value && (React.isValidElement(value) || typeof value === 'object')) {
+    if (Games[key] && value && (React.isValidElement(value) || typeof value === 'object')) {
       gameContent[key] = value;
     }
   });
 
   if (!gameContent || typeof gameContent !== 'object') {
-    console.warn('GameTabs: No valid game content found in props');
-    return <div>No game content available</div>;
+    throw new Error('GameTabs: No valid game content found in props');
   }
 
-  // Check if gameContent has any entries
   const entries = Object.entries(gameContent);
   if (entries.length === 0) {
-    return <div>No games configured</div>;
+    throw new Error('GameTabs element without any tabs');
   }
 
   return (
