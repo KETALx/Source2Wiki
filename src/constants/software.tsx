@@ -15,4 +15,9 @@ export const Games: Record<string, SoftwareInfo> = {
 
 export const Tools: Record<string, SoftwareInfo> = {
   "s2v": {PrettyName: "Source2 Viewer", IconPath: "/img/tools/s2v.png", Color: "#1bb072ff"},
+  "radgen": {PrettyName: "RadGen", IconPath: "/img/tools/radgen.png", Color: "#91513a"},
+};
+
+export const Socials: Record<string, SoftwareInfo> = {
+  "discord": {PrettyName: "Discord", IconPath: "/img/socials/discord.svg", Color: "#494b5fff"},
 };

@@ -2,10 +2,11 @@
 import React from 'react';
 import { Games } from '@site/src/constants/software';
 import { Tools } from '@site/src/constants/software';
+import { Socials } from '@site/src/constants/software';
 import { SoftwareInfo } from '@site/src/constants/software';
 import { useColorMode } from '@docusaurus/theme-common';
 
-interface GameIconProps {
+interface SoftwareProps {
   name: string;
   size?: number | string;
   link?: string;
@@ -13,38 +14,55 @@ interface GameIconProps {
   suffix?: string;
 }
 
-export function Game(GameIconProps: GameIconProps)
+export function Game(SoftwareProps: SoftwareProps)
 {
-  if (!GameIconProps.name)
+  if (!SoftwareProps.name)
   {
     throw new Error(`name parameter missing from Game element`);
   }
 
-  const softwateInfo = Games[GameIconProps.name];
+  const softwateInfo = Games[SoftwareProps.name];
 
   if (!softwateInfo)
   {
-    throw new Error(`Game name "${GameIconProps.name}" is invalid, if you want to add a new game, go to src/constants/software`);
+    throw new Error(`Game name "${SoftwareProps.name}" is invalid, if you want to add a new game, go to src/constants/software`);
   }
 
-  return GetSoftwareHtml(softwateInfo, GameIconProps);
+  return GetSoftwareHtml(softwateInfo, SoftwareProps);
 }
 
-export function Tool(GameIconProps: React.FC<GameIconProps>)
+export function Tool(SoftwareProps: React.FC<SoftwareProps>)
 {
-  if (!GameIconProps.name)
+  if (!SoftwareProps.name)
   {
     throw new Error(`name parameter missing from Tool element`);
   }
 
-  const softwateInfo = Tools[GameIconProps.name];
+  const softwateInfo = Tools[SoftwareProps.name];
 
   if (!softwateInfo)
   {
-    throw new Error(`Tool name "${GameIconProps.name}" is invalid, if you want to add a new tool, go to src/constants/software`);
+    throw new Error(`Tool name "${SoftwareProps.name}" is invalid, if you want to add a new tool, go to src/constants/software`);
   }
 
-  return GetSoftwareHtml(softwateInfo, GameIconProps);
+  return GetSoftwareHtml(softwateInfo, SoftwareProps);
+}
+
+export function Social(SoftwareProps: React.FC<SoftwareProps>)
+{
+  if (!SoftwareProps.name)
+  {
+    throw new Error(`name parameter missing from Social element`);
+  }
+
+  const softwateInfo = Socials[SoftwareProps.name];
+
+  if (!softwateInfo)
+  {
+    throw new Error(`Social name "${SoftwareProps.name}" is invalid, if you want to add a new social, go to src/constants/software`);
+  }
+
+  return GetSoftwareHtml(softwateInfo, SoftwareProps);
 }
 
 const GetSoftwareHtml = (softwateInfo: SoftwareInfo, {
@@ -53,7 +71,7 @@ const GetSoftwareHtml = (softwateInfo: SoftwareInfo, {
   link,
   iconOnly,
   suffix
-}: GameIconProps): React.JSX.Element =>
+}: SoftwareProps): React.JSX.Element =>
 {
   const { colorMode } = useColorMode(); // 'light' or 'dark'
 
