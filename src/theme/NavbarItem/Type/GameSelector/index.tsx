@@ -3,9 +3,10 @@ import { Games } from '@site/src/constants/software';
 import { useState } from 'react';
 import { useGameParam } from '@site/src/contexts/GameParamContext';
 import { useHistory, useLocation } from '@docusaurus/router';
+import useIsMobile from '@site/src/hooks/UseIsMobile';
+import './style.css';
 
 interface Props {
-    readonly mobile?: boolean;
     readonly position?: 'left' | 'right';
 }
 
@@ -14,6 +15,7 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
     const { gameParam, setGameParam } = useGameParam();
     const history = useHistory();
     const location = useLocation();
+    const isMobile = useIsMobile();
 
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
@@ -47,7 +49,16 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
                     dismissHandler(e)
                 }
             >
-                <div>{gameParam != "any" && gameParam in Games ? `Game: ${Games[gameParam].PrettyName}` : `Select Game...`}</div>
+                {/* Button label based on view width (mobile) */}
+                {isMobile ? (
+                    gameParam != "any" ? 
+                    (<img src={Games[gameParam].IconPath} alt={Games[gameParam].PrettyName} className="game-selector-game-icon small" />)
+                    : (<div className="game-selector-label">Any</div>)
+                ) : (
+                    <div>{gameParam != "any" && gameParam in Games ? `Game: ${Games[gameParam].PrettyName}` : `Select Game...`}</div>
+                )}
+                
+                {/* Dropdown */}
                 {showDropDown && (
                     <GameDropDown
                         games={Games}

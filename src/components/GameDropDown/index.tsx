@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { GameInfo } from '@site/src/constants/games';
+import { SoftwareInfo } from '@site/src/constants/software';
+import './style.css';
 
 type DropDownProps = {
-    games: Record<string, GameInfo>;
+    games: Record<string, SoftwareInfo>;
     showDropDown: boolean;
     toggleDropDown: Function;
     gameSelection: Function;
@@ -32,7 +33,7 @@ const GameDropDown: React.FC<DropDownProps> = ({ games, gameSelection }: DropDow
                                 onClickHandler(game);
                             }}
                         >
-                            {games[game].IconPath === undefined ? '' : <img src={games[game].IconPath} alt={games[game].PrettyName} className="game-selector-game-icon" />}
+                            {games[game].IconPath === undefined ? '' : <img src={games[game].IconPath} alt={game} className="game-selector-game-icon" />}
                             {games[game].PrettyName}
                         </p>
                     );
