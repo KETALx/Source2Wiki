@@ -66,11 +66,13 @@
 @media screen and (max-width: 996px) {
     .game-selector{
         min-width: 2rem;
+        max-width: 6rem;
         transition:none;
     }
 
     .dropdown{
         min-width: 180px;
+        left: -50%;
     }
 }
 

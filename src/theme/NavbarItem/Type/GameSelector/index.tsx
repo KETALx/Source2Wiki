@@ -57,7 +57,7 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
                 ) : (
                     <div>{gameParam != "any" && gameParam in Games ? `Game: ${Games[gameParam].PrettyName}` : `Select Game...`}</div>
                 )}
-                
+
                 {/* Dropdown */}
                 {showDropDown && (
                     <GameDropDown
@@ -67,6 +67,7 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
                         gameSelection={setGame}
                     />
                 )}
+                
             </button>
         </>
     );
