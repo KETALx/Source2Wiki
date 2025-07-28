@@ -96,6 +96,17 @@ html[data-theme='dark'] .alert--legacy {
   content: '[LEGACY]';
 }
 
+@media screen and (max-width: 996px){
+  .navbar__title {
+    display: none;
+    
+  }
+
+  .navbar__brand {
+    margin-right: 0px;
+  }
+}
+
 /* Github icon */
 .github-button {
   display: flex !important;
