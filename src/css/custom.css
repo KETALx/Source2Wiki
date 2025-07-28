@@ -96,7 +96,7 @@ html[data-theme='dark'] .alert--legacy {
   content: '[LEGACY]';
 }
 
-@media screen and (max-width: 996px){
+@media screen and (max-width: 576px){
   .navbar__title {
     display: none;
     
