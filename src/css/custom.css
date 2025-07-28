@@ -107,6 +107,12 @@ html[data-theme='dark'] .alert--legacy {
   }
 }
 
+@media screen and (max-width: 996px){
+  .searchHintContainer_Pkmr {
+    display: none !important;
+  }
+}
+
 /* Github icon */
 .github-button {
   display: flex !important;
