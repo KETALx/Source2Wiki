@@ -96,6 +96,23 @@ html[data-theme='dark'] .alert--legacy {
   content: '[LEGACY]';
 }
 
+@media screen and (max-width: 576px){
+  .navbar__title {
+    display: none;
+    
+  }
+
+  .navbar__brand {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 996px){
+  .searchHintContainer_Pkmr {
+    display: none !important;
+  }
+}
+
 /* Github icon */
 .github-button {
   display: flex !important;
