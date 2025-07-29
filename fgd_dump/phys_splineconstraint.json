@@ -105,6 +105,62 @@
           "Description": "",
           "Options": [],
           "Annotations": []
+        },
+        {
+          "FriendlyName": "Enable Lateral Constraint",
+          "InternalName": "enablelinearconstraint",
+          "VariableType": "Bool",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Enable Vertical Constraint",
+          "InternalName": "enableverticalconstraint",
+          "VariableType": "Bool",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Enable Angular Constraint",
+          "InternalName": "enableangularconstraint",
+          "VariableType": "Bool",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Enable Limit",
+          "InternalName": "enablelimit",
+          "VariableType": "Bool",
+          "Description": "Prevents the object from moving off the ends of the spline. Don\u0027t use on splines that are meant to loop.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Linear Frequency",
+          "InternalName": "linearfrequency",
+          "VariableType": "Float",
+          "Description": "Linear spring frequency (stiffness).",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Linear Damping Ratio",
+          "InternalName": "lineardampingratio",
+          "VariableType": "Float",
+          "Description": "Linear spring damping ratio.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Fire Events On Path",
+          "InternalName": "fireeventsonpath",
+          "VariableType": "Bool",
+          "Description": "Notify our path when the attached entity moves along it so it can fire passthrough events, etc.",
+          "Options": [],
+          "Annotations": []
         }
       ],
       "InputOutputs": [
@@ -239,6 +295,24 @@
           "Description": "Fired when the constraint breaks.",
           "VariableType": "Void",
           "Type": "Output"
+        },
+        {
+          "Name": "SetSplineEntity",
+          "Description": "Set the spline to a new entity",
+          "VariableType": "String",
+          "Type": "Input"
+        },
+        {
+          "Name": "EnableLimit",
+          "Description": "Enable the limits at the ends of the spline",
+          "VariableType": "Void",
+          "Type": "Input"
+        },
+        {
+          "Name": "DisableLimit",
+          "Description": "Disable the limits at the ends of the spline",
+          "VariableType": "Void",
+          "Type": "Input"
         }
       ]
     },

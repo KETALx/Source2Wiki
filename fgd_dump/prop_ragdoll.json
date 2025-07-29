@@ -165,7 +165,7 @@
               "Description": ""
             },
             {
-              "Name": "Allow stretch",
+              "Name": "Unused",
               "Description": ""
             },
             {
@@ -177,6 +177,14 @@
               "Description": ""
             }
           ],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Allow Stretch",
+          "InternalName": "allowStretch",
+          "VariableType": "Bool",
+          "Description": "Disables rendering fixup on bones that become separated",
+          "Options": [],
           "Annotations": []
         },
         {
@@ -192,6 +200,22 @@
           "InternalName": "lightingorigin",
           "VariableType": "TargetDestination",
           "Description": "Select an entity to specify a location to sample lighting from, instead of using this entity\u0027s origin.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Mass Scale",
+          "InternalName": "massScale",
+          "VariableType": "Float",
+          "Description": "A scale multiplier for the object\u0027s mass. 0 = use auto-calculated mass based on the object\u0027s size / shape and material",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Buoyancy Scale",
+          "InternalName": "buoyancyscale",
+          "VariableType": "Float",
+          "Description": "Scale on the buoyancy / fluid forces applied to this object",
           "Options": [],
           "Annotations": []
         }
@@ -380,7 +404,7 @@
       ]
     },
     {
-      "Game": "steamvr",
+      "Game": "hla",
       "EntityType": "Point",
       "Name": "prop_ragdoll",
       "Description": "A prop that physically simulates and can be articulated with internal joints. The joint constraints are part of the physics model.",
@@ -569,22 +593,6 @@
           "Annotations": []
         },
         {
-          "FriendlyName": "Skin",
-          "InternalName": "skin",
-          "VariableType": "MaterialGroup",
-          "Description": "Some models have multiple versions of their textures, called skins.",
-          "Options": [],
-          "Annotations": []
-        },
-        {
-          "FriendlyName": "Body Groups",
-          "InternalName": "bodygroups",
-          "VariableType": "BodyGroupChoices",
-          "Description": "",
-          "Options": [],
-          "Annotations": []
-        },
-        {
           "FriendlyName": "Disable Shadows",
           "InternalName": "disableshadows",
           "VariableType": "Bool",
@@ -653,8 +661,41 @@
           "FriendlyName": "Lighting Origin",
           "InternalName": "lightingorigin",
           "VariableType": "TargetDestination",
-          "Description": "Select a path_corner entity to specify a location to sample lighting from, instead of using this entity\u0027s origin.",
+          "Description": "Select an entity to specify a location to sample lighting from, instead of using this entity\u0027s origin.",
           "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Model State",
+          "InternalName": "model_state",
+          "VariableType": "ModelStateChoices",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Is Discoverable",
+          "InternalName": "discoverable",
+          "VariableType": "Bool",
+          "Description": "If set, this prop ragdoll has dialog associated with it when discovered.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Carry Type Override",
+          "InternalName": "carrytype_override",
+          "VariableType": "Choices",
+          "Description": "",
+          "Options": [
+            {
+              "Name": "Default (Code decides)",
+              "Description": ""
+            },
+            {
+              "Name": "Too heavy to move",
+              "Description": ""
+            }
+          ],
           "Annotations": []
         }
       ],
@@ -1222,7 +1263,7 @@
       ]
     },
     {
-      "Game": "hla",
+      "Game": "steamvr",
       "EntityType": "Point",
       "Name": "prop_ragdoll",
       "Description": "A prop that physically simulates and can be articulated with internal joints. The joint constraints are part of the physics model.",
@@ -1411,6 +1452,22 @@
           "Annotations": []
         },
         {
+          "FriendlyName": "Skin",
+          "InternalName": "skin",
+          "VariableType": "MaterialGroup",
+          "Description": "Some models have multiple versions of their textures, called skins.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Body Groups",
+          "InternalName": "bodygroups",
+          "VariableType": "BodyGroupChoices",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
           "FriendlyName": "Disable Shadows",
           "InternalName": "disableshadows",
           "VariableType": "Bool",
@@ -1479,41 +1536,8 @@
           "FriendlyName": "Lighting Origin",
           "InternalName": "lightingorigin",
           "VariableType": "TargetDestination",
-          "Description": "Select an entity to specify a location to sample lighting from, instead of using this entity\u0027s origin.",
+          "Description": "Select a path_corner entity to specify a location to sample lighting from, instead of using this entity\u0027s origin.",
           "Options": [],
-          "Annotations": []
-        },
-        {
-          "FriendlyName": "Model State",
-          "InternalName": "model_state",
-          "VariableType": "ModelStateChoices",
-          "Description": "",
-          "Options": [],
-          "Annotations": []
-        },
-        {
-          "FriendlyName": "Is Discoverable",
-          "InternalName": "discoverable",
-          "VariableType": "Bool",
-          "Description": "If set, this prop ragdoll has dialog associated with it when discovered.",
-          "Options": [],
-          "Annotations": []
-        },
-        {
-          "FriendlyName": "Carry Type Override",
-          "InternalName": "carrytype_override",
-          "VariableType": "Choices",
-          "Description": "",
-          "Options": [
-            {
-              "Name": "Default (Code decides)",
-              "Description": ""
-            },
-            {
-              "Name": "Too heavy to move",
-              "Description": ""
-            }
-          ],
           "Annotations": []
         }
       ],
