@@ -1,6 +1,21 @@
 
+.game-tabs {
+  display: flex;
+}
+
 .tabs__item {
-  min-width: 10rem;
+  flex-shrink: 0;
+}
+
+/* Nudge items above horizontal scroll bar so highlight doesnt overlap */
+@media screen and (max-width: 996px) {
+  .game-tabs {
+    padding-top: 8px;
+  }
+
+  .tabs__item {
+    transform: translateY(-8px);
+  }
 }
 
 .tabs__item::before {
