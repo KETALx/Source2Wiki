@@ -1,6 +1,6 @@
 import GameDropDown from '@site/src/components/GameDropDown';
 import { Games } from '@site/src/constants/software';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useGameParam } from '@site/src/contexts/GameParamContext';
 import { useHistory, useLocation } from '@docusaurus/router';
 import useIsMobile from '@site/src/hooks/UseIsMobile';
@@ -19,9 +19,9 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
 
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
-    const toggleDropDown = () => {
-        setShowDropDown(!showDropDown);
-    };
+    const toggleDropDown = useCallback(() => {
+        setShowDropDown(state => !state);
+    }, []);
 
     const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
         if (event.currentTarget === event.target) {
@@ -29,7 +29,7 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
         }
     };
 
-    const setGame = (game: string): void => {
+    const setGame = useCallback((game: string) => {
         const params = new URLSearchParams(location.search);
 
         params.set('game', game);
@@ -38,7 +38,21 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
             search: params.toString(),
         });
         setGameParam(game);
-    };
+    }, [location, history, setGameParam]);
+
+    // change label based on mobile state and selected game
+    const buttonLabel = useMemo(() => {
+        if (isMobile === undefined) {
+            // avoid showing anything to prevent label flicker
+            return null;
+        }
+        if (isMobile) {
+            return gameParam != "any"
+                ? <img src={Games[gameParam].IconPath} alt={Games[gameParam].PrettyName} className="game-selector-game-icon small" />
+                : <div className="game-selector-label">Any</div>;
+        }
+        return <div className='current-game-label'>{gameParam != "any" && gameParam in Games ? `Game: ${Games[gameParam].PrettyName}` : `Select Game...`}</div>;
+    }, [isMobile, gameParam]);
 
     return (
         <>
@@ -49,14 +63,7 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
                     dismissHandler(e)
                 }
             >
-                {/* Button label based on view width (mobile) */}
-                {isMobile ? (
-                    gameParam != "any" ? 
-                    (<img src={Games[gameParam].IconPath} alt={Games[gameParam].PrettyName} className="game-selector-game-icon small" />)
-                    : (<div className="game-selector-label">Any</div>)
-                ) : (
-                    <div>{gameParam != "any" && gameParam in Games ? `Game: ${Games[gameParam].PrettyName}` : `Select Game...`}</div>
-                )}
+                {buttonLabel}
 
                 {/* Dropdown */}
                 {showDropDown && (
@@ -67,7 +74,7 @@ export default function GameSelectorNavbarItem(props: Props): React.JSX.Element 
                         gameSelection={setGame}
                     />
                 )}
-                
+
             </button>
         </>
     );
