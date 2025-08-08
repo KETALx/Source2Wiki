@@ -1,5 +1,7 @@
 # DMX
 
+Datamodel is a strongly-typed generic data structure, Datamodel Exchange (MDX) is a Datamodel container file format with multiple possible encodings; binary and ASCII ("keyvalues2") are included.
+
 ## Header
 
 DMX files always begin with a header in this format:
