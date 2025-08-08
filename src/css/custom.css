@@ -105,6 +105,15 @@ html[data-theme='dark'] .alert--legacy {
   .navbar__brand {
     margin-right: 0px;
   }
+
+  .navbar__search-input {
+    max-width: 6rem;
+  }
+
+  /* hide placeholder on mobile */
+  .navbar__search-input::placeholder {
+    font-size: 0 !important;
+  }
 }
 
 @media screen and (max-width: 996px){
