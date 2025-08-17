@@ -1076,6 +1076,12 @@
           "Type": "Output"
         },
         {
+          "Name": "OnDestructiblePartDestroyed",
+          "Description": "",
+          "VariableType": "Cpp",
+          "Type": "Output"
+        },
+        {
           "Name": "RunScriptFile",
           "Description": "Load and execute a script file",
           "VariableType": "String",
@@ -3826,6 +3832,12 @@
           "Name": "OnIgnite",
           "Description": "Fired when this object catches fire.",
           "VariableType": "Void",
+          "Type": "Output"
+        },
+        {
+          "Name": "OnDestructiblePartDestroyed",
+          "Description": "",
+          "VariableType": "Cpp",
           "Type": "Output"
         },
         {

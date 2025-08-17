@@ -452,6 +452,12 @@
           "Type": "Output"
         },
         {
+          "Name": "OnDestructiblePartDestroyed",
+          "Description": "",
+          "VariableType": "Cpp",
+          "Type": "Output"
+        },
+        {
           "Name": "Alpha",
           "Description": "Set the sprite\u0027s alpha (0 - 255).",
           "VariableType": "Integer",

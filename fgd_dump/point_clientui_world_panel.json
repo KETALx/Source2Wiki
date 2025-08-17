@@ -146,6 +146,14 @@
           "Annotations": []
         },
         {
+          "FriendlyName": "Css Class(es)",
+          "InternalName": "css_class",
+          "VariableType": "String",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
           "FriendlyName": "",
           "InternalName": "horizontal_align",
           "VariableType": "Choices",
@@ -1031,6 +1039,14 @@
           "FriendlyName": "Lit",
           "InternalName": "lit",
           "VariableType": "Bool",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Css Class(es)",
+          "InternalName": "css_class",
+          "VariableType": "String",
           "Description": "",
           "Options": [],
           "Annotations": []

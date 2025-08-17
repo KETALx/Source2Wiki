@@ -439,7 +439,7 @@
       "Game": "dota2",
       "EntityType": "Point",
       "Name": "env_wind",
-      "Description": "An entity to control wind in the map. Partially functional.",
+      "Description": "An entity to control wind in the map.",
       "IconPath": "fgd_dump/img/dota2/env_wind.png",
       "PageAnnotation": null,
       "Properties": [
@@ -472,14 +472,6 @@
           "InternalName": "maxwind",
           "VariableType": "Integer",
           "Description": "Maximum speed of the wind while idling.",
-          "Options": [],
-          "Annotations": []
-        },
-        {
-          "FriendlyName": "Radius",
-          "InternalName": "windradius",
-          "VariableType": "Float",
-          "Description": "The radius this entity applies wind effects to.  -1 for global effect, other value to allow multiple or limited wind entities.",
           "Options": [],
           "Annotations": []
         },
@@ -524,10 +516,18 @@
           "Annotations": []
         },
         {
-          "FriendlyName": "Max gust dir change (degrees)",
+          "FriendlyName": "Max gust direction change (degrees)",
           "InternalName": "gustdirchange",
           "VariableType": "Integer",
           "Description": "Maximum amount that the wind\u0027s direction changes due to a gust.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Radius",
+          "InternalName": "windradius",
+          "VariableType": "Float",
+          "Description": "The radius this entity applies wind effects to.  -1 for global effect, other value to allow multiple or limited wind entities.",
           "Options": [],
           "Annotations": []
         }

@@ -276,6 +276,12 @@
           "Type": "Output"
         },
         {
+          "Name": "OnDestructiblePartDestroyed",
+          "Description": "",
+          "VariableType": "Cpp",
+          "Type": "Output"
+        },
+        {
           "Name": "RunScriptFile",
           "Description": "Load and execute a script file",
           "VariableType": "String",
@@ -1077,6 +1083,22 @@
           "Description": "Select an entity to specify a location to sample lighting from, instead of using this entity\u0027s origin.",
           "Options": [],
           "Annotations": []
+        },
+        {
+          "FriendlyName": "Mass Scale",
+          "InternalName": "massScale",
+          "VariableType": "Float",
+          "Description": "A scale multiplier for the object\u0027s mass. 0 = use auto-calculated mass based on the object\u0027s size / shape and material",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Buoyancy Scale",
+          "InternalName": "buoyancyscale",
+          "VariableType": "Float",
+          "Description": "Scale on the buoyancy / fluid forces applied to this object",
+          "Options": [],
+          "Annotations": []
         }
       ],
       "InputOutputs": [
@@ -1132,6 +1154,12 @@
           "Name": "OnIgnite",
           "Description": "Fired when this object catches fire.",
           "VariableType": "Void",
+          "Type": "Output"
+        },
+        {
+          "Name": "OnDestructiblePartDestroyed",
+          "Description": "",
+          "VariableType": "Cpp",
           "Type": "Output"
         },
         {

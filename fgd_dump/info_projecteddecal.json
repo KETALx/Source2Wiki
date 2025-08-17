@@ -26,9 +26,17 @@
           "Annotations": []
         },
         {
-          "FriendlyName": "",
-          "InternalName": "texture",
-          "VariableType": "Decal",
+          "FriendlyName": "Decal Material",
+          "InternalName": "material",
+          "VariableType": "Resource",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Decal Texture Sequence",
+          "InternalName": "sequence_name",
+          "VariableType": "String",
           "Description": "",
           "Options": [],
           "Annotations": []
@@ -38,6 +46,14 @@
           "InternalName": "Distance",
           "VariableType": "Float",
           "Description": "Distance from the origin to project the decal.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Not in Multiplayer",
+          "InternalName": "not_in_multiplayer",
+          "VariableType": "Bool",
+          "Description": "",
           "Options": [],
           "Annotations": []
         }
@@ -184,9 +200,17 @@
           "Annotations": []
         },
         {
-          "FriendlyName": "",
-          "InternalName": "texture",
-          "VariableType": "Decal",
+          "FriendlyName": "Decal Material",
+          "InternalName": "material",
+          "VariableType": "Resource",
+          "Description": "",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Decal Texture Sequence",
+          "InternalName": "sequence_name",
+          "VariableType": "String",
           "Description": "",
           "Options": [],
           "Annotations": []
@@ -196,6 +220,14 @@
           "InternalName": "Distance",
           "VariableType": "Float",
           "Description": "Distance from the origin to project the decal.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Not in Multiplayer",
+          "InternalName": "not_in_multiplayer",
+          "VariableType": "Bool",
+          "Description": "",
           "Options": [],
           "Annotations": []
         }

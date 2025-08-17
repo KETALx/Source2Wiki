@@ -3358,6 +3358,14 @@
           "Annotations": []
         },
         {
+          "FriendlyName": "Add Modifier",
+          "InternalName": "add_modifier",
+          "VariableType": "String",
+          "Description": "Will add this modifier when the entity spawns.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
           "FriendlyName": "Impact Damage Type",
           "InternalName": "Damagetype",
           "VariableType": "Choices",
@@ -3379,6 +3387,14 @@
           "Annotations": []
         },
         {
+          "FriendlyName": "Mass Override",
+          "InternalName": "gamemass",
+          "VariableType": "Integer",
+          "Description": "Override the mass of the object instead of calculating it based on the size / shape and material.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
           "FriendlyName": "Mass Scale",
           "InternalName": "massScale",
           "VariableType": "Float",
@@ -3387,10 +3403,10 @@
           "Annotations": []
         },
         {
-          "FriendlyName": "Mass Override",
-          "InternalName": "gamemass",
-          "VariableType": "Integer",
-          "Description": "Override the mass of the object instead of calculating it based on the size / shape and material.",
+          "FriendlyName": "Center of Mass Offset",
+          "InternalName": "masscenteroffset",
+          "VariableType": "Vector",
+          "Description": "Offset in local space applied to the object\u0027s center of mass.",
           "Options": [],
           "Annotations": []
         },

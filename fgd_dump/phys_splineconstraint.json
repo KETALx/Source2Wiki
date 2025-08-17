@@ -155,6 +155,14 @@
           "Annotations": []
         },
         {
+          "FriendlyName": "Friction",
+          "InternalName": "jointfriction",
+          "VariableType": "Float",
+          "Description": "Resistance/friction for movement along the spline",
+          "Options": [],
+          "Annotations": []
+        },
+        {
           "FriendlyName": "Fire Events On Path",
           "InternalName": "fireeventsonpath",
           "VariableType": "Bool",
@@ -446,6 +454,14 @@
           "Annotations": []
         },
         {
+          "FriendlyName": "Enable Limit",
+          "InternalName": "enablelimit",
+          "VariableType": "Bool",
+          "Description": "Prevents the object from moving off the ends of the spline. Don\u0027t use on splines that are meant to loop.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
           "FriendlyName": "Linear Frequency",
           "InternalName": "linearfrequency",
           "VariableType": "Float",
@@ -458,6 +474,22 @@
           "InternalName": "lineardampingratio",
           "VariableType": "Float",
           "Description": "Linear spring damping ratio.",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Friction",
+          "InternalName": "jointfriction",
+          "VariableType": "Float",
+          "Description": "Resistance/friction for movement along the spline",
+          "Options": [],
+          "Annotations": []
+        },
+        {
+          "FriendlyName": "Fire Events On Path",
+          "InternalName": "fireeventsonpath",
+          "VariableType": "Bool",
+          "Description": "Notify our path when the attached entity moves along it so it can fire passthrough events, etc.",
           "Options": [],
           "Annotations": []
         }
@@ -599,6 +631,18 @@
           "Name": "SetSplineEntity",
           "Description": "Set the spline to a new entity",
           "VariableType": "String",
+          "Type": "Input"
+        },
+        {
+          "Name": "EnableLimit",
+          "Description": "Enable the limits at the ends of the spline",
+          "VariableType": "Void",
+          "Type": "Input"
+        },
+        {
+          "Name": "DisableLimit",
+          "Description": "Disable the limits at the ends of the spline",
+          "VariableType": "Void",
           "Type": "Input"
         }
       ]
