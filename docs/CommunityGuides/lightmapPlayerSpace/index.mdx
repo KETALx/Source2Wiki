@@ -18,13 +18,13 @@ Correct placement of these volumes will cause the lightmapper to automatically a
 
 ## Creating lightmap player space volumes
 
-To create these simply use the Block tool to make the meshes, make sure to apply the `materials/tools/toolslightmapres.vmat` material! this is what actually makes the engine count them as lightmap player space volumes!
+To create these simply use the Block tool to make the meshes, make sure to apply the `materials/tools/toolslightmapres.vmat` material, this is what actually makes the engine count them as lightmap player space volumes!
 
 They should fill every space in your level where the player is expected to be, placement example:
 
 ![lightmap player space placement example](./placementExample.gif "Lightmap player space placement example")
 
-Starting from the surface of the volume lightmap resolution will slowly decrease, as such you should try to be somewhat accurate with your placement, as a rule of thumb surfaces that the player can view up close should never be further than 16 units away from the surface of a volume!
+Starting from the surface of the volume lightmap resolution will slowly decrease, as such you should try to be somewhat accurate with your placement, as a rule of thumb surfaces that the player can view up close should never be further than 16 units away from the surface of a volume.
 
 ## Viewing luxel density
 
@@ -36,4 +36,4 @@ Below is an example of how the lightmap player space volume will affect the luxe
 
 ![lightmap player space compiled example](./resultExample.gif "Lightmap player space compiled example")
 
-This might seem subtle, but in a full level it adds up! unless your level is very simple or small, you should never ship a production level without lightmap player space volumes!
+This might seem subtle, but in a full level it adds up, unless your level is very simple or small, you should never ship a production level without lightmap player space volumes!
