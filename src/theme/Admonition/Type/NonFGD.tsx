@@ -4,12 +4,11 @@ import Translate from '@docusaurus/Translate';
 import type { Props } from '@theme/Admonition/Type/Tip';
 import AdmonitionLayout from '@theme/Admonition/Layout';
 
-
 const infimaClassName = 'alert alert--nonFGD';
 
 const defaultProps = {
-    icon: '[NON-FGD]',
-    title: "",
+    icon: <img src={require('@site/static/img/nonFGD/obsolete.png').default} alt="Non FGD" style={{ width: '2rem', height: '2rem'}} />,
+    title: "Non FGD",
 };
 
 export default function AdmonitionTypeLegacy(props: Props) {
