@@ -76,6 +76,7 @@ details summary::before {
   border-top-color: currentColor !important;
 }
 
+/* legacy annotation */
 .alert--legacy {
   --ifm-alert-background-color: rgba(212, 53, 28, 0.5);
   --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
@@ -94,6 +95,27 @@ html[data-theme='dark'] .alert--legacy {
   color: var(--ifm-color-emphasis-300);
   padding-right: 0.5rem;
   content: '[LEGACY]';
+}
+
+/* non fgd annotation */
+.alert--nonFGD {
+  --ifm-alert-background-color: #bea1dc;
+  --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
+  --ifm-alert-foreground-color: rgb(66, 69, 73);
+  --ifm-alert-border-color: #ac5dc7;
+}
+
+html[data-theme='dark'] .alert--nonFGD {
+  --ifm-alert-background-color: #5e427c;
+  --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
+  --ifm-alert-foreground-color: rgb(255, 255, 255);
+  --ifm-alert-border-color: rgb(181, 121, 202);
+}
+
+.nonFGD_item a::before {
+  color: var(--ifm-color-emphasis-300);
+  padding-right: 0.5rem;
+  content: '[NON-FGD]';
 }
 
 @media screen and (max-width: 576px){

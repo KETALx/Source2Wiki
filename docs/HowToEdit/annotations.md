@@ -41,3 +41,7 @@ This is a `danger` Admonition.
 :::legacy
 
 :::
+
+:::nonFGD
+
+:::
