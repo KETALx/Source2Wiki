@@ -1,0 +1,12 @@
+{
+    "Properties": [
+        {
+          "FriendlyName": "Team Num",
+          "InternalName": "TeamNum",
+          "VariableType": "Integer",
+          "Description": "Team number associated with this buyzone. \\\n\\\n TeamNum: \\\n0-Everyone, \\\n2-Terrorists, \\\n 3-Counter-Terrorists",
+          "Options": [],
+          "Annotations": []
+        }
+      ]
+}
