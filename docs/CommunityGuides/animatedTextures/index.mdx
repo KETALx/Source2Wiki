@@ -1,6 +1,6 @@
 ---
 description: How to create animated textures. 
-title: Create Animated Textures
+title: Creating Animated Textures
 ---
 
 There are several methods to create animated textures in Source 2. We will follow the standard workflow, using the official tools for the creation of animated textures.  
@@ -9,24 +9,23 @@ Firstly, there are two types of animated textures:
 1. The animated texture that loops non-stop.  
 2. The animated texture that only executes a sequence (commonly used in particles).  
 
+## .mks file creation
+
 We create a `.mks` file. This file must follow the format below:
 
-:::info
+:::warning
 C-style comments are supported. Block comments are not!  
 `// This is a comment` ✅ Correct  
 `/* This is a comment */` ❌ Fails to compile
-:::
-:::info
+
 The `frame` KeyValue is a path to an image file, after always termine the line with and extra `1`, for example:
 
 `frame grain_frame_00_color.tga 1`
-:::
-:::info
+
 The images you use (so the compiler can generate an atlas) are highly recommended to be in a resolution that is a power of two (2^n) or divisible by two.  
 This way the generated atlas is more likely to be filled efficiently (less wasted space).  
 The number of frames should also be a power of two or divisible by two.
-:::
-:::info
+
 The compiler by default will generate the best resolution for the altas, many times you will enconter an error saying that the compiler could not find what resolution suits the best for the altas,
 in that case try:
 
@@ -86,6 +85,8 @@ Once you have created your `.mks` file, it will tell the compiler how to create 
 
 After defining the animated texture, we need to compile it so it can be used in particles or materials. There are different workflows depending on the case.  
 
+## Creating an animated texture for particles (.vtex)
+
 Let’s start with **particles**:  
 Particles usually don’t use materials. They use textures. For that, we need to create a texture by making a `.vtex` file.  
 In the `"m_fileName" "string"` KeyValue2, you must type the relative path of your `.mks` file.  
@@ -94,22 +95,6 @@ Example:
 `"m_fileName" "string" "materials/particles/screenoverlay/film_grain_001/film_grain_001_animated.mks"`
 
 Here is a complete example of how your `.vtex` file should look:
-
-:::tip
-You can change the compression format of the compiled texture! (Very useful when dealing with pure/strong colors)
-
-Go to the `"m_outputFormat" "string" "CompressionFormat"` KeyValue2 and type your desired compression format.  
-Example: `"m_outputFormat" "string" "RGBA8888"`  
-
-To know what compression formats Source 2 supports, start the game, open `vconsole2.exe`, and search for `Scratch RT Allocations:`  
-
-![vc1](./vconsole2_searchbar.png "vc1")  
-![vc2](./vconsole2_cmpr_formats.png "vc2")  
-
-The compression format is shown with an orange underline.  
-
-![vc3](./format.png "vc3")
-:::
 
 ```
 <!-- dmx encoding keyvalues2_noids 4 format vtex 1 -->
@@ -161,10 +146,26 @@ The compression format is shown with an orange underline.
 }
 ```
 
+:::tip
+You can change the compression format of the compiled texture! (Very useful when dealing with pure/strong colors)
+
+Go to the `"m_outputFormat" "string" "CompressionFormat"` KeyValue2 and type your desired compression format.  
+Example: `"m_outputFormat" "string" "RGBA8888"`  
+
+To know what compression formats Source 2 supports, start the game, open `vconsole2.exe`, and search for `Scratch RT Allocations:`  
+
+![vc1](./vconsole2_searchbar.png "vc1")  
+![vc2](./vconsole2_cmpr_formats.png "vc2")  
+
+The compression format is shown with an orange underline.  
+
+![vc3](./format.png "vc3")
+:::
+
 ---
 Once the `.vtex` file is configured, you need to compile it. Usually this happens when you first load the tools if everything is set up correctly. If it doesn’t appear, open the asset browser, right-click, and select `Full Recompile`.
 
-:::tip
+:::info
 Many times when compiling the `.vtex` or `.vmat` file you may make mistakes in the `.mks`.  
 The error shown in `vconsole2.exe` is often unclear. Run `resourcecompiler.exe` to get the full error output.
 
@@ -183,9 +184,30 @@ Now your texture is ready to use for particles!
 
 ---
 
+## Creating an animated material
+
 For *materials* the process is very similar, in the *Material editor*, create a new material, open the dialog to import a texture and select the `.mks` file.
 
 ![met1](./met1.png "met1")
 ![met2](./met2.png "met2")
 
 ---
+
+### Animation modes
+
+In some games like <Game name="cs2"/> and <Game name="hla"/> the `Complex` material shader supports multiple animation modes, as seen below:
+
+:::warning
+Make sure the "Texture Animation" checkbox is checked as in the image! Afterwards, settings related to animation will appear in the "Texture Animation" section. 
+:::
+
+![animationModes](./animationModes.png "animation modes")
+
+#### Sequential
+Sequential will go frame by frame in respect to the "Animation time per frame" setting.
+
+#### Random
+Random will pick a random frame in respect to the "Animation time per frame" setting.
+
+#### Scripted
+Scripted will use the "Animation Frame" setting to set the animation frame, you can add a Dynamic Expression to this parameter, and drive it trough render attributes.
