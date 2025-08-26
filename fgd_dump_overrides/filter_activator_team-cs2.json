@@ -33,7 +33,7 @@
       "FriendlyName": "Filter Team Number",
       "InternalName": "filterteam",
       "VariableType": "Integer",
-      "Description": "The team number to filter by. If the filter mode is Allow, only entities whose team matches the given string will pass the filter. If the filter mode is Disallow, all entities EXCEPT those whose team matches the given string will pass the filter.",
+      "Description": "The team number to filter by. If the filter mode is Allow, only entities whose team matches the given string will pass the filter. If the filter mode is Disallow, all entities EXCEPT those whose team matches the given string will pass the filter. \n  - 0 - Everyone \n  - 2 - Terrorists \n  - 3 - Counter-Terrorists",
       "Options": [],
       "Annotations": []
     }
