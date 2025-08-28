@@ -2,7 +2,8 @@ export interface SoftwareInfo
 {
     PrettyName: string,
     IconPath?: string,
-    Color?: string
+    Color?: string,
+    Link?: string
 }
 
 export const Games: Record<string, SoftwareInfo> = {
@@ -14,8 +15,8 @@ export const Games: Record<string, SoftwareInfo> = {
 };
 
 export const Tools: Record<string, SoftwareInfo> = {
-  "s2v": {PrettyName: "Source2 Viewer", IconPath: "/img/tools/s2v.png", Color: "#1bb072ff"},
-  "radgen": {PrettyName: "RadGen", IconPath: "/img/tools/radgen.png", Color: "#91513a"},
+  "s2v": {PrettyName: "Source2 Viewer", IconPath: "/img/tools/s2v.png", Color: "#1bb072ff", Link: "https://s2v.app/"},
+  "radgen": {PrettyName: "RadGen", IconPath: "/img/tools/radgen.png", Color: "#91513a", Link: "https://radargenerator.github.io/"},
 };
 
 export const Socials: Record<string, SoftwareInfo> = {

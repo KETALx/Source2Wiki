@@ -128,6 +128,11 @@ const GetSoftwareHtml = (softwateInfo: SoftwareInfo, {
     </span>
   );
 
+  if(link === undefined && softwateInfo.Link)
+  {
+    link = softwateInfo.Link;
+  }
+
   if (link) {
     return (
       <a 
