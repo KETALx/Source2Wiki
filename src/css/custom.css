@@ -78,14 +78,14 @@ details summary::before {
 
 /* legacy annotation */
 .alert--legacy {
-  --ifm-alert-background-color: rgba(212, 53, 28, 0.5);
+  --ifm-alert-background-color: rgba(212, 52, 28, 0.156);
   --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
   --ifm-alert-foreground-color: rgb(66, 69, 73);
   --ifm-alert-border-color: #d4351c;
 }
 
 html[data-theme='dark'] .alert--legacy {
-  --ifm-alert-background-color: rgba(212, 53, 28, 0.5);
+  --ifm-alert-background-color: rgba(212, 52, 28, 0.446);
   --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
   --ifm-alert-foreground-color: rgb(255, 255, 255);
   --ifm-alert-border-color: #d4351c;
@@ -99,7 +99,7 @@ html[data-theme='dark'] .alert--legacy {
 
 /* non fgd annotation */
 .alert--nonFGD {
-  --ifm-alert-background-color: #bea1dc;
+  --ifm-alert-background-color: #bea1dc88;
   --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
   --ifm-alert-foreground-color: rgb(66, 69, 73);
   --ifm-alert-border-color: #ac5dc7;
@@ -113,6 +113,27 @@ html[data-theme='dark'] .alert--nonFGD {
 }
 
 .nonFGD_item a::before {
+  color: var(--ifm-color-emphasis-300);
+  padding-right: 0.5rem;
+  content: '[NON-FGD]';
+}
+
+/* todo annotation */
+.alert--todo {
+  --ifm-alert-background-color: #55e95238;
+  --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
+  --ifm-alert-foreground-color: rgb(66, 69, 73);
+  --ifm-alert-border-color: #3fd13d;
+}
+
+html[data-theme='dark'] .alert--todo {
+  --ifm-alert-background-color: #1c601b;
+  --ifm-alert-background-color-highlight: rgba(212, 53, 28, 0.15);
+  --ifm-alert-foreground-color: rgb(255, 255, 255);
+  --ifm-alert-border-color: #3fd13d;
+}
+
+.todo_item a::before {
   color: var(--ifm-color-emphasis-300);
   padding-right: 0.5rem;
   content: '[NON-FGD]';

@@ -45,3 +45,7 @@ This is a `danger` Admonition.
 :::nonFGD
 
 :::
+
+:::todo
+Something to do.
+:::
