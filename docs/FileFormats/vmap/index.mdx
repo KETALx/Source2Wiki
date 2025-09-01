@@ -20,7 +20,7 @@ The following is a simple vmap in plain text format from <Game name="cs2" /> con
 
 :::info
 The Root of a vmap DMX file is `CMapRootElement`\
-In the text encoding of DMX, when an Element is only referenced once, it will be directly inserted as a value of the property that references it, when it's referenced multiple times, it will be extracted and put into the Root element, and everything referencing it will reference its GUID.
+In the text encoding of DMX, when an Element is only referenced once, it will be directly inserted as a value of the property that references it, when it's referenced multiple times, it will be extracted and put into the Root element, and everything referencing it will reference its UUID.
 :::
 
 [Vmap example](./example.vmap.mdx) (external page due to the large size)
@@ -39,6 +39,16 @@ Annoyingly the [naming convention](https://en.wikipedia.org/wiki/Naming_conventi
 :::todo
 Would be nice to have info on which nodes exists in what vmap version, and possibly even game specific vmap nodes.
 :::
+
+### DMElement
+
+Not a vmap node, but the base DataModel element that every other node inherits from, All nodes have these properties.
+
+```json
+"id" "elementid" "53f14a8f-0ac6-4fba-a836-7d85d70bf641"
+```
+- id \<`elementid`\>\
+A UUID V4 ID used to refer to this node.
 
 ### CMapRootElement
 
@@ -76,54 +86,55 @@ This is the main element of the vmap, it contains a few map specific properties 
 ```
 
 - isprefab \<`bool`\>\
-    If the map is a prefab or not.
+If the map is a prefab or not.
 
 - editorbuild \<`int`\>\
-    The build number that you can view in `Help -> About`.
+The build number that you can view in `Help -> About`.
 
 - editorversion \<`int`\>\
-    Unknown.
+Unknown.
 
 - itemFile \<`string`\>\
-    Unknown.
+Unknown.
 
-- defaultcamera \<`CStoredCamera`\>\
-    The default editor camera.
+- defaultcamera \<`[CStoredCamera](#cstoredcamera)`\>\
+The default editor camera.
 
-- 3dcameras \<`CStoredCameras`\>\
-    A list of other editor cameras.
+- 3dcameras \<`[CStoredCameras](#cstoredcameras)`\>\
+A list of other editor cameras.
 
 - world \<`CMapWorld`\>\
-    An Element containing Elements or referenced to Elements which make up the map like entities, meshes, etc..
+An Element containing Elements or referenced to Elements which make up the map like entities, meshes, etc..
 
 - visbility \<`CVisibilityMgr`\>\
-    Yes you read that right, this Element is hilariously misspelled as `visbility` instead of `visibility`. It keeps track of what is hidden in the map, from quick hide, selection sets, etc..
+Yes you read that right, this Element is hilariously misspelled as `visbility` instead of `visibility`. It keeps track of what is hidden in the map, from quick hide, selection sets, etc..
 
 - mapVariables \<`CMapVariableSet`\>\
-    Map variables, they can be set in the `Map -> MapProperties -> Map Variables` tab.
+Map variables, they can be set in the `Map -> MapProperties -> Map Variables` tab.
 
-- rootSelectionSet \<`CMapSelectionSet`\>\
-    A hidden selection set which contains all other selection sets.
+- rootSelectionSet \<[CMapSelectionSet](#cmapselectionset)\>\
+A hidden selection set which contains all other selection sets.
 
 - m_ReferencedMeshSnapshots \<`element_array`\>\
-    Mesh snapshots referenced by this map.
+Mesh snapshots referenced by this map.
 
 - m_bIsCordoning \<`bool`\>\
-    If the cordon tool is active.
+If the cordon tool is active.
 
 - m_bCordonsVisible \<`bool`\>\
-    If the cordon tool is visible.
+If the cordon tool is visible.
 
 - nodeInstanceData \<`element_array`\>\
-    Per node instance data for things like hammer preview lighting
+Per node instance data for things like hammer preview lighting
 
 ### MapNode
 
-This is not a real vmap node, but most nodes have these properties so it is our best guess.
+This is not a real vmap node, but most nodes have these properties so it seems like a likely base class.
 
 ```json
 "MapNode"
 {
+	"id" "elementid" "53f14a8f-0ac6-4fba-a836-7d85d70bf641"
 	"nodeID" "int" "1"
 	"referenceID" "uint64" "0x0"
 	"children" "element_array"
@@ -142,38 +153,38 @@ This is not a real vmap node, but most nodes have these properties so it is our 
 }
 ```
 - nodeID \<`int`\>\
-    The ID of this node, can be seen in Hammer in the Outliner.
+The ID of this node, can be seen in Hammer in the Outliner.
 
 - referenceID \<`uint64`\>\
-    Unknown, but seems to be some sort of pointer however Hammer will load maps just fine with this always being 0.
+Unknown, but seems to be some sort of pointer however Hammer will load maps just fine with this always being 0.
 
 - children \<`element_array`\>\
-    All the children of this node, they can be other nodes directly (when the node only exists once) or GUID references to other nodes 
+All the children of this node, they can be other nodes directly (when the node only exists once) or UUID references to other nodes 
 
 - variableTargetKeys \<`string_array`\>\
 variableNames \<`string_array`\>\
-	Both seem to be related to the map variable system, possibly when a property of a node is using a map variable.
+Both seem to be related to the map variable system, possibly when a property of a node is using a map variable.
 
 - origin \<`vector3`\>\
-	The origin of the node in Hammer units.
+The origin of the node in Hammer units.
 
 - angles \<`qangle`\>\
-	The angles of the node in euler angles.
+The angles of the node in euler angles.
 
 - scales \<`vector3`\>\
-	The scales of the node.
+The scales of the node.
 
 - transformLocked \<`bool`\>\
-	If true, stops the origin, angles or scales of this object from being changed in Hammer, the option to toggle this in the UI shows in the Transform group in `Object Properties`
+If true, stops the origin, angles or scales of this object from being changed in Hammer, the option to toggle this in the UI shows in the Transform group in `Object Properties`
 
 - force_hidden \<`bool`\>\
-	If true it will force this object to not be visibile to VIS, shown in the Visibility group in `Object Properties`
+If true it will force this object to not be visibile to VIS, shown in the Visibility group in `Object Properties`
 
 - editorOnly \<`bool`\>\
-	If true it will force this object to not be compiled into the map, useful for developer only messages, shown in the Visibility group in `Object Properties`
+If true it will force this object to not be compiled into the map, useful for developer only messages, shown in the Visibility group in `Object Properties`
 
 - customVisGroup \<`string`\>\
-	Will add a custom Vis group in the `Auto Vis Groups` panel, this object will show under it, useful for organisation. Shown in the Visibility group in `Object Properties`
+Will add a custom Vis group in the `Auto Vis Groups` panel, this object will show under it, useful for organisation. Shown in the Visibility group in `Object Properties`
 
 ### BaseEntity
 #### Inherits from [MapNode](#mapnode)
@@ -187,13 +198,13 @@ This is not a real vmap node, but [CMapEntity](#cmapentity), [CMapWorld](#cmapwo
 ```
 
 - relayPlugData \<[DmePlugList](#dmepluglist)\>\
-	Unknown.
+Unknown.
 
 - connectionsData \<`element_array`\>\
-	IO Outputs, contains [DmeConnectionData](#dmeconnectiondata) elements.
+IO Outputs, contains [DmeConnectionData](#dmeconnectiondata) elements.
 	
 - entity_properties \<[EditGameClassProps](#editgameclassprops)\>\
-	A string -> string dictionary of entity keyvalues. 
+A string -> string dictionary of entity keyvalues. 
 
 ### DmePlugList
 
@@ -202,6 +213,7 @@ Unknown.
 ```json
 "relayPlugData" "DmePlugList"
 {
+	"id" "elementid" "53f14a8f-0ac6-4fba-a836-7d85d70bf641"
 	"names" "string_array" 
 	[
 	]
@@ -218,16 +230,16 @@ Unknown.
 ```
 
 - names \<`string_array`\>\
-	Unknown.
+Unknown.
 
 - dataTypes \<`int_array`\>\
-	Unknown.
+Unknown.
 
 - plugTypes \<`int_array`\>\
-	Unknown.
+Unknown.
 
 - descriptions \<`string_array`\>\
-	Unknown.
+Unknown.
 
 ### DmeConnectionData
 
@@ -236,6 +248,7 @@ An entity Output.
 ```json
 "DmeConnectionData"
 {
+	"id" "elementid" "53f14a8f-0ac6-4fba-a836-7d85d70bf641"
 	"outputName" "string" "OnUser1"
 	"targetType" "int" "7"
 	"targetName" "string" "!self"
@@ -247,25 +260,25 @@ An entity Output.
 ```
 
 - outputName \<`string`\>\
-	The name of the output.
+The name of the output.
 
 - targetType \<`int`\>\
-	Unknown. Seems to always be 7?
+Unknown. Seems to always be 7?
 
 - targetName \<`string`\>\
-	The name of the entity being targeted.
+The name of the entity being targeted.
 
 - inputName \<`string`\>\
-	The name of the input on the entity being targeted.
+The name of the input on the entity being targeted.
 
 - overrideParam \<`string`\>\
-	The value being passed along with the output.
+The value being passed along with the output.
 
 - delay \<`float`\>\
-	The amount of time before the output is fired.
+The amount of time before the output is fired.
 
 - timesToFire \<`int`\>\
-	How many times to refire the output.
+How many times to refire the output.
 
 ### EditGameClassProps
 
@@ -280,6 +293,8 @@ This is the main element that contains everything in the vmap, its also the enti
 ```json
 "world" "CMapWorld"
 {
+	"id" "elementid" "53f14a8f-0ac6-4fba-a836-7d85d70bf641"
+
 	"children" "element_array"
 
 	"variableTargetKeys" "string_array" 
@@ -301,3 +316,148 @@ This is the main element that contains everything in the vmap, its also the enti
 	"entity_properties" "EditGameClassProps"
 }
 ```
+
+- children \<`element_array`\>\
+The children of CMapWorld are everything contained in the map, in the text encoding of DMX if a node is referenced only once, its inserted directly, if it is referenced more than once, it will be put into the Root element, in this case [CMapRootElement](cmaprootelement) and it will be referenced by its UUID.
+
+- nextDecalID \<`int`\>\
+Unknown.
+
+- fixupEntityNames \<`bool`\>\
+Unknown. Prefabs have this option in order to prevent name collisions, why would the main VMAP need this tho?
+
+- mapUsageType \<`string`\>\
+	The type of the map.
+
+	- standard\
+		For normal maps.
+
+	- background\
+		For CS2 background UI maps. 
+
+	- skybox\
+		For 3D skyboxes.
+
+	- minigame\
+		Unknown.
+
+	- sharedenvironment\
+		Unknown.
+
+- randomSeed \<`int`\>\
+	Unknown. Perhaps used for *something* that needs a random seed, but that, and why can you set it?
+
+### CStoredCamera
+
+An editor camera.
+
+```json
+"defaultcamera" "CStoredCamera"
+{
+	"id" "elementid" "53f14a8f-0ac6-4fba-a836-7d85d70bf641"
+	"position" "vector3" "-291.7109680176 -261.1103210449 217.3533782959"
+	"lookat" "vector3" "-291.8317871094 -260.2921142578 216.7912902832"
+}
+```
+- position \<`vector3`\>\
+	The position of the camera.
+
+- lookat \<`vector3`\>\
+	This is the origin offset by one unit along the look vector.
+
+### CStoredCameras
+
+The editor cameras stored in the vmap.
+
+:::todo
+When are multiple editor cameras stored in the vmap?
+:::
+
+```json
+"3dcameras" "CStoredCameras"
+{
+	"id" "elementid" "21382dc1-34f4-4dc1-b017-0f431fddfdd5"
+	"activecamera" "int" "-1"
+	"cameras" "element_array" 
+}
+```
+
+- activecamera \<`int`\>\
+	The current active camera index.
+
+- cameras \<`element_array`\>\
+	An array of [CStoredCamera](#cstoredcamera) elements.
+
+### CVisibilityMgr
+#### Inherits from [MapNode](#mapnode)
+
+Manages hiding nodes.
+
+:::todo
+Why is this a node? can you select this in Hammer somehow? It seems to always be at 0 0 0.
+:::
+
+```json
+"visbility" "CVisibilityMgr"
+{
+	"id" "elementid" "ce0026f6-da81-41e3-9267-3d2bdadba660"
+	"nodeID" "int" "0"
+	"referenceID" "uint64" "0x0"
+	"children" "element_array" 
+	"variableTargetKeys" "string_array" 
+	"variableNames" "string_array" 
+	"nodes" "element_array" 
+	"hiddenFlags" "int_array" `
+	"origin" "vector3" "0 0 0"
+	"angles" "qangle" "0 0 0"
+	"scales" "vector3" "1 1 1"
+	"transformLocked" "bool" "0"
+	"force_hidden" "bool" "0"
+	"editorOnly" "bool" "0"
+	"customVisGroup" "string" ""
+	"randomSeed" "int" "634985197"
+}
+```
+
+- nodes \<`element_array`\>\
+	Every node in the map which can be hidden.
+
+- hiddenFlags \<`int_array`\>\
+	Per node hide flags, this array indexes into the `nodes` element array.
+
+	- 0\
+	Visible.
+
+	- 1\
+	Selection set.
+
+	- 2\
+	Unknown.
+
+	- 3\
+	Unknown.
+
+	- 4\
+	Quick hide.
+
+### CMapSelectionSet
+
+A selection set.
+
+```json
+"CMapSelectionSet"
+{
+	"id" "elementid" "2fa0034b-467f-4a4f-aa22-a432a2fee57c"
+	"children" "element_array" 
+	"selectionSetName" "string" "selectionset"
+	"selectionSetData" "CObjectSelectionSetDataElement"
+},
+```
+- children \<`element_array`\>\
+	Selection sets can contain other selection sets, this is not selected objects, those are stored in selectionSetData.
+
+- selectionSetName \<`string`\>\
+	The name of the selection set.
+
+- selectionSetData \<`CObjectSelectionSetDataElement`\>\
+	The data of the selection set, like the selected objects.
