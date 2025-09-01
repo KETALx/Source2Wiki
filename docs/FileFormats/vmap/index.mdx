@@ -8,7 +8,10 @@ title: VMAP
 It is a [DMX](../dmx.md) file under binary encoding version 4, [Hammer](../../EngineTools/HammerEditor/index.mdx) can export a plain text version if you go to `File -> Save Copy As Text`
 
 :::info
-<Tool name="s2v"/> can decompile compiled maps (.vmap_c usually contained within a VPK) into a .vmap 
+<Tool name="s2v"/> can decompile compiled maps (.vmap_c usually contained within a VPK) into a .vmap\
+<Tool name="github" suffix="Datamodel.NET" link="https://github.com/kristiker/Datamodel.NET"/> can be used to read and write kv2 files including vmaps, using C#.
+
+An implemented version of the vmap format as described here can be found in the source code of <Tool name="github" suffix="VRF (s2v)" link="https://github.com/ValveResourceFormat/ValveResourceFormat/blob/master/ValveResourceFormat/IO/ContentFormats/ValveMap.cs"/>, used for vmap_c decompilation.
 :::
 
 ## Vmap example
@@ -72,44 +75,229 @@ This is the main element of the vmap, it contains a few map specific properties 
 }
 ```
 
-- isprefab : `bool`\
+- isprefab \<`bool`\>\
     If the map is a prefab or not.
 
-- editorbuild : `int`\
+- editorbuild \<`int`\>\
     The build number that you can view in `Help -> About`.
 
-- editorversion : `int`\
+- editorversion \<`int`\>\
     Unknown.
 
-- itemFile : `string`\
+- itemFile \<`string`\>\
     Unknown.
 
-- defaultcamera : `CStoredCamera`\
+- defaultcamera \<`CStoredCamera`\>\
     The default editor camera.
 
-- 3dcameras : `CStoredCameras`\
+- 3dcameras \<`CStoredCameras`\>\
     A list of other editor cameras.
 
-- world : `CMapWorld`\
+- world \<`CMapWorld`\>\
     An Element containing Elements or referenced to Elements which make up the map like entities, meshes, etc..
 
-- visbility : `CVisibilityMgr`\
+- visbility \<`CVisibilityMgr`\>\
     Yes you read that right, this Element is hilariously misspelled as `visbility` instead of `visibility`. It keeps track of what is hidden in the map, from quick hide, selection sets, etc..
 
-- mapVariabled : `CMapVariableSet`\
+- mapVariables \<`CMapVariableSet`\>\
     Map variables, they can be set in the `Map -> MapProperties -> Map Variables` tab.
 
-- rootSelectionSet : `CMapSelectionSet`\
+- rootSelectionSet \<`CMapSelectionSet`\>\
     A hidden selection set which contains all other selection sets.
 
-- m_ReferencedMeshSnapshots : `element_array`\
+- m_ReferencedMeshSnapshots \<`element_array`\>\
     Mesh snapshots referenced by this map.
 
-- m_bIsCordoning : `bool`\
+- m_bIsCordoning \<`bool`\>\
     If the cordon tool is active.
 
-- m_bCordonsVisible : `bool`\
+- m_bCordonsVisible \<`bool`\>\
     If the cordon tool is visible.
 
-- nodeInstanceData : `element_array`\
+- nodeInstanceData \<`element_array`\>\
     Per node instance data for things like hammer preview lighting
+
+### MapNode
+
+This is not a real vmap node, but most nodes have these properties so it is our best guess.
+
+```json
+"MapNode"
+{
+	"nodeID" "int" "1"
+	"referenceID" "uint64" "0x0"
+	"children" "element_array"
+
+	"variableTargetKeys" "string_array" 
+	"variableNames" "string_array" 
+
+	"origin" "vector3" "0 0 0"
+	"angles" "qangle" "0 0 0"
+	"scales" "vector3" "1 1 1"
+
+	"transformLocked" "bool" "0"
+	"force_hidden" "bool" "0"
+	"editorOnly" "bool" "0"
+	"customVisGroup" "string" ""
+}
+```
+- nodeID \<`int`\>\
+    The ID of this node, can be seen in Hammer in the Outliner.
+
+- referenceID \<`uint64`\>\
+    Unknown, but seems to be some sort of pointer however Hammer will load maps just fine with this always being 0.
+
+- children \<`element_array`\>\
+    All the children of this node, they can be other nodes directly (when the node only exists once) or GUID references to other nodes 
+
+- variableTargetKeys \<`string_array`\>\
+variableNames \<`string_array`\>\
+	Both seem to be related to the map variable system, possibly when a property of a node is using a map variable.
+
+- origin \<`vector3`\>\
+	The origin of the node in Hammer units.
+
+- angles \<`qangle`\>\
+	The angles of the node in euler angles.
+
+- scales \<`vector3`\>\
+	The scales of the node.
+
+- transformLocked \<`bool`\>\
+	If true, stops the origin, angles or scales of this object from being changed in Hammer, the option to toggle this in the UI shows in the Transform group in `Object Properties`
+
+- force_hidden \<`bool`\>\
+	If true it will force this object to not be visibile to VIS, shown in the Visibility group in `Object Properties`
+
+- editorOnly \<`bool`\>\
+	If true it will force this object to not be compiled into the map, useful for developer only messages, shown in the Visibility group in `Object Properties`
+
+- customVisGroup \<`string`\>\
+	Will add a custom Vis group in the `Auto Vis Groups` panel, this object will show under it, useful for organisation. Shown in the Visibility group in `Object Properties`
+
+### BaseEntity
+#### Inherits from [MapNode](#mapnode)
+
+This is not a real vmap node, but [CMapEntity](#cmapentity), [CMapWorld](#cmapworld) and [CMapInstance](#cmapinstance) share these properties so this seems like a likely base class.
+
+```json
+"relayPlugData" "DmePlugList" ""
+"connectionsData" "element_array" ""
+"entity_properties" "EditGameClassProps" ""
+```
+
+- relayPlugData \<[DmePlugList](#dmepluglist)\>\
+	Unknown.
+
+- connectionsData \<`element_array`\>\
+	IO Outputs, contains [DmeConnectionData](#dmeconnectiondata) elements.
+	
+- entity_properties \<[EditGameClassProps](#editgameclassprops)\>\
+	A string -> string dictionary of entity keyvalues. 
+
+### DmePlugList
+
+Unknown.
+
+```json
+"relayPlugData" "DmePlugList"
+{
+	"names" "string_array" 
+	[
+	]
+	"dataTypes" "int_array" 
+	[
+	]
+	"plugTypes" "int_array" 
+	[
+	]
+	"descriptions" "string_array" 
+	[
+	]
+}
+```
+
+- names \<`string_array`\>\
+	Unknown.
+
+- dataTypes \<`int_array`\>\
+	Unknown.
+
+- plugTypes \<`int_array`\>\
+	Unknown.
+
+- descriptions \<`string_array`\>\
+	Unknown.
+
+### DmeConnectionData
+
+An entity Output.
+
+```json
+"DmeConnectionData"
+{
+	"outputName" "string" "OnUser1"
+	"targetType" "int" "7"
+	"targetName" "string" "!self"
+	"inputName" "string" "FireUser1"
+	"overrideParam" "string" "overrideExample"
+	"delay" "float" "0"
+	"timesToFire" "int" "-1"
+}
+```
+
+- outputName \<`string`\>\
+	The name of the output.
+
+- targetType \<`int`\>\
+	Unknown. Seems to always be 7?
+
+- targetName \<`string`\>\
+	The name of the entity being targeted.
+
+- inputName \<`string`\>\
+	The name of the input on the entity being targeted.
+
+- overrideParam \<`string`\>\
+	The value being passed along with the output.
+
+- delay \<`float`\>\
+	The amount of time before the output is fired.
+
+- timesToFire \<`int`\>\
+	How many times to refire the output.
+
+### EditGameClassProps
+
+A string -> string dictionary storing entity keyvalues, seems to just be a standard kv2 element, which can act as a string dictionary. 
+
+
+### CMapWorld
+#### Inherits from [BaseEntity](#baseentity) -> [MapNode](#mapnode)
+
+This is the main element that contains everything in the vmap, its also the entity you edit when you change properties in `Map -> Map Properties`, it becomes the `worldspawn` entity at runtime.
+
+```json
+"world" "CMapWorld"
+{
+	"children" "element_array"
+
+	"variableTargetKeys" "string_array" 
+	"variableNames" "string_array" 
+	"relayPlugData" "DmePlugList"
+	"connectionsData" "element_array" 
+	"nextDecalID" "int" "0"
+	"fixupEntityNames" "bool" "1"
+	"mapUsageType" "string" "standard"
+	"origin" "vector3" "0 0 0"
+	"angles" "qangle" "0 0 0"
+	"scales" "vector3" "1 1 1"
+	"transformLocked" "bool" "0"
+	"force_hidden" "bool" "0"
+	"editorOnly" "bool" "0"
+	"customVisGroup" "string" ""
+	"randomSeed" "int" "1641157616"
+	
+	"entity_properties" "EditGameClassProps"
+}
+```
