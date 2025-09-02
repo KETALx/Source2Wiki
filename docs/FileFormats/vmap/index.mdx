@@ -459,5 +459,203 @@ A selection set.
 - selectionSetName \<`string`\>\
 	The name of the selection set.
 
-- selectionSetData \<`CObjectSelectionSetDataElement`\>\
-	The data of the selection set, like the selected objects.
+- selectionSetData \<[DMElement](#dmelement)\>\
+	The data of the selection set, it seems to be an opaque element but it only takes `CObjectSelectionSetDataElement` and `CFaceSelectionSetDataElement`
+
+### CObjectSelectionSetDataElement
+
+```json
+"selectionSetData" "CObjectSelectionSetDataElement"
+{
+	"id" "elementid" "ab42b08e-ab9b-4d9f-b2c7-299b165b1f2e"
+	"name" "string" "objectSelectionSetData"
+	"selectedObjects" "element_array" 
+}
+```
+
+- name \<`string`\>\
+	The name of the selection set data element. doesn't seem like the user can set this, its always `objectSelectionSetData`, may be used to tell which data object selectionSetData contains in their DMX implementation?
+
+- selectedObjects \<`element_array`\>\
+	A list of the objects contained in this selection set.
+
+### CFaceSelectionSetDataElement
+
+```json
+"selectionSetData" "CFaceSelectionSetDataElement"
+{
+	"id" "elementid" "fe928e85-ae50-4034-8016-7ff0cdf77a64"
+	"name" "string" "faceSelectionSetData"
+	"meshes" "element_array" 
+	"faces" "int_array" 
+}
+```
+
+- name \<`string`\>\
+	The name of the selection set data element. doesn't seem like the user can set this, its always `faceSelectionSetData`, may be used to tell which data object selectionSetData contains in their DMX implementation?
+
+- meshes \<`element_array`\>\
+	A list of the meshes contained in this selection set.
+
+- faces \<`int_array`\>\
+	A list of mesh faces contained in this selection set.
+
+### CMapPrefab
+#### Inherits from [MapNode](#mapnode)
+
+A prefab.
+
+```json
+"CMapPrefab"
+{
+	"id" "elementid" "5e3176dd-3b19-4f28-8318-7ebaa88b9a90"
+	"nodeID" "int" "6"
+	"referenceID" "uint64" "0xdadc15530f843d58"
+	"children" "element_array" 
+	"variableTargetKeys" "string_array" 
+	"variableNames" "string_array" 
+	"relayPlugData" "DmePlugList"
+	"connectionsData" "element_array" 
+	"target" "element" ""
+	"variableOverrideNames" "string_array" 
+	"variableOverrideValues" "string_array" 
+	"origin" "vector3" "0 0 0"
+	"angles" "qangle" "0 0 0"
+	"scales" "vector3" "1 1 1"
+	"transformLocked" "bool" "0"
+	"force_hidden" "bool" "0"
+	"editorOnly" "bool" "0"
+	"customVisGroup" "string" ""
+	"randomSeed" "int" "1910343828"
+	"tintColor" "color" "255 255 255 255"
+	"visexclude" "bool" "0"
+	"targetMapPath" "string" "maps/prefabs/s2wikiprefab.vmap"
+	"targetName" "string" ""
+	"fixupEntityNames" "bool" "1"
+	"useTargetNameAsPrefix" "bool" "0"
+	"loadIfNested" "bool" "1"
+	"prefabRuntimeEntity" "bool" "0"
+	"loadAtRuntime" "bool" "0"
+}
+```
+
+- target \<`element`\>\
+	Unknown.
+
+- variableOverrideNames \<`string_array`\>\
+	Unknown.
+
+- variableOverrideValues \<`string_array`\>\
+	Unknown.
+
+- targetMapPath \<`string`\>\
+	The map to load.
+
+- fixupEntityNames \<`bool`\>\
+	If enabled, any entity target names within the prefab will have a prefix applied to ensure they are unique. This prevents any issues with entities in two different prefabs having name collisions.
+
+- useTargetNameAsPrefix \<`bool`\>\
+	If this is enabled and name fixup is enabled, the prefix used for name fixup will be the prefab target name instead of the unique id. If the target name is empty then the prefab the unique id will still be used as the prefix. Note that if two prefabs use the same target name for their prefix it will be possible to have entities inside the prefabs end up with name collisions.
+
+- loadIfNested \<`bool`\>\
+	If enabled the prefab will be loaded when it is the child of another prefab, if disabled, this prefab will not be loaded if it is the child of another prefab.
+
+- prefabRuntimeEntity \<`bool`\>\
+	Unknown.
+
+- loadAtRuntime \<`bool`\>\
+	If enabled the prefab will not be baked into the parent map during map compile, but instead will be dynamically loaded in the game. This requires the target map to be compiled separately. Additionally this requires support for dynamic loading of maps by the game, which may not be supported by all games and game systems. Do not use without checking to see if this is fully supported by the game you are working on.
+
+### CMapInstance
+#### Inherits from [MapNode](#mapnode)
+
+An instance.
+
+```json
+"CMapInstance"
+{
+	"id" "elementid" "b4c5ff57-756d-4fad-b2c4-7c3599acd5d1"
+	"nodeID" "int" "9"
+	"referenceID" "uint64" "0xa644a071fe2a1342"
+	"variableTargetKeys" "string_array" 
+	"variableNames" "string_array" 
+	"relayPlugData" "DmePlugList"
+	"connectionsData" "element_array" 
+	"target" "element" "d3c5aac9-c6b0-4ca0-a74f-1bad53097d65"
+	"origin" "vector3" "-328 -80 24"
+	"angles" "qangle" "0 0 0"
+	"scales" "vector3" "1 1 1"
+	"transformLocked" "bool" "0"
+	"force_hidden" "bool" "0"
+	"editorOnly" "bool" "0"
+	"customVisGroup" "string" ""
+	"randomSeed" "int" "1789577885"
+	"tintColor" "color" "255 255 255 255"
+	"visexclude" "bool" "0"
+}
+```
+
+- target \<`element`\>\\
+	A [CMapGroup](#cmapgroup) element containing all the objects inside of this instance.
+
+- tintColor \<`color`\>\\
+	If this color is set, all objects inside of the instance will be tinted.
+
+- visexclude \<`bool`\>\\
+	If true, everything inside of the instance will be excluded from vis.
+
+### CMapGroup
+#### Inherits from [MapNode](#mapnode)
+
+A group which can contain nodes, it seems to inherit from the MapNode baseclass without any changes.
+
+### CMapVariableSet
+
+Stores map variables.
+
+```json
+"mapVariables" "CMapVariableSet"
+{
+	"id" "elementid" "80fdfd0c-3ea4-4519-9e66-23fafdc20d60"
+	"variableNames" "string_array" 
+	"variableValues" "string_array" 
+	"variableTypeNames" "string_array" 
+	"variableTypeParameters" "string_array" 
+	"m_ChoiceGroups" "element_array" 
+}
+```
+
+- variableNames \<`string_array`\>\\
+	The name of the map variable.
+
+- variableValues \<`string_array`\>\\
+	The value of the map variable.
+
+- variableTypeNames \<`string_array`\>\\
+	The type of the map variable, like `string`.
+
+- variableTypeParameters \<`string_array`\>\\
+	The type paremeter of the map variable, not sure what this is.
+
+- m_ChoiceGroups \<`element_array`\>\\
+	Not sure what this does either, but takes a [CMapVariableChoiceGroup](#cmapvariablechoicegroup) object.
+
+### CMapVariableChoiceGroup
+
+A map variable choice group.
+
+```json
+"CMapVariableChoiceGroup"
+{
+	"id" "elementid" "795f358a-afb8-4f98-993b-0fd940de5aae"
+	"name" "string" "newChoiceGroup"
+	"m_ChoiceVariables" "string_array" 
+	"m_Choices" "element_array" 
+	"m_ActiveValue" "string" ""
+}
+```
+
+- name \<`string`\>\\
+	The name of the choice group.
+
+Honestly not even gonna try to pretend like I understand these, if you do, feel free to complete this list. 
